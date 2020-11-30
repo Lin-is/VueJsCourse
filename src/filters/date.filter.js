@@ -8,7 +8,7 @@ export default function dateFilter(value, format = 'date') {
   }
 
   if (format.includes('time')) {
-    options.hout = '2-digit';
+    options.hour = '2-digit';
     options.minute = '2-digit';
     options.second = '2-digit';
   }
