@@ -87,10 +87,8 @@
 import M from 'materialize-css';
 import { mapGetters } from 'vuex';
 import { required, minValue } from 'vuelidate/lib/validators';
-import Loader from '../components/app/Loader.vue';
 
 export default {
-  components: { Loader },
   name: 'record',
   data() {
     return {
