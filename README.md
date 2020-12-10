@@ -1,3 +1,3 @@
 # vue-course
 
-## [Start page](https://lin-is.github.io/VueJsCourse/)
+## [Живая версия](https://vue-course-51c0f.web.app/)
