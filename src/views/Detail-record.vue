@@ -3,9 +3,9 @@
   <Loader v-if="loading"/>
   <div v-else-if="record">
     <div class="breadcrumb-wrap">
-      <router-link to="/history" class="breadcrumb">История</router-link>
+      <router-link to="/history" class="breadcrumb">{{'History' | localize}}</router-link>
       <a @click.prevent class="breadcrumb">
-        {{record.type === 'income' ? 'Доход' : 'Расход'}}
+        {{ linkClass }}
       </a>
     </div>
     <div class="row">
@@ -18,9 +18,9 @@
           }"
         >
           <div class="card-content white-text">
-            <p>Описание: {{record.description}}</p>
-            <p>Сумма: {{record.amount | currency('RUB')}}</p>
-            <p>Категория: {{record.categoryName}}</p>
+            <p>{{'Descr' | localize}}: {{record.description}}</p>
+            <p>{{'Amount' | localize}}: {{record.amount | currency('RUB')}}</p>
+            <p>{{'Category' | localize}}: {{record.categoryName}}</p>
 
             <small>{{record.date | date('datetime')}}</small>
           </div>
@@ -33,12 +33,20 @@
 </template>
 
 <script>
+import localizeFilter from '@/filters/localize.filter';
+
 export default {
   name: 'detail-record',
+  metaInfo() {
+    return {
+      title: this.$title('Detail_Title'),
+    };
+  },
   data() {
     return {
       record: null,
       loading: true,
+      linkClass: '',
     };
   },
   async mounted() {
@@ -51,6 +59,8 @@ export default {
       ...record,
       categoryName: category.title,
     };
+
+    this.linkClass = this.record.type === 'income' ? localizeFilter('Income') : localizeFilter('Outcome');
 
     this.loading = false;
   },

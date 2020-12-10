@@ -1,7 +1,7 @@
 <template>
   <div>
   <div class="page-title">
-    <h3>История записей</h3>
+    <h3>{{'RecordHistory' | localize}}</h3>
   </div>
 
   <div class="history-chart">
@@ -10,8 +10,8 @@
 
   <Loader v-if="loading"/>
 
-  <p v-else-if="!records.length" class="center">Записей пока нет.
-    <router-link to="/record"> Добавить новую запись</router-link>
+  <p v-else-if="!records.length" class="center">{{'Message_NoRecords' | localize}}.
+    <router-link to="/record"> {{'AddRecord' | localize}}</router-link>
   </p>
 
   <section v-else>
@@ -20,8 +20,8 @@
       v-model="page"
       :page-count="pageCount"
       :click-handler="pageChangeHandler"
-      :prev-text="'Назад'"
-      :next-text="'Вперед'"
+      :prev-text="'Prev' | localize"
+      :next-text="'Next' | localize"
       :container-class="'pagination'"
       :page-class="'waves-effect'"
     />
@@ -32,12 +32,18 @@
 <script>
 import paginationMixin from '@/mixins/pagination.mixin';
 import HistoryTable from '@/components/HistoryTable.vue';
+import localizeFilter from '@/filters/localize.filter';
 import { Pie } from 'vue-chartjs';
 
 export default {
   name: 'history',
   extends: Pie,
   mixins: [paginationMixin],
+  metaInfo() {
+    return {
+      title: this.$title('History'),
+    };
+  },
   data() {
     return {
       loading: true,
@@ -58,14 +64,14 @@ export default {
           ...record,
           categoryName: categories.find((c) => c.id === record.categoryId).title,
           typeClass: record.type === 'income' ? 'green' : 'red',
-          typeText: record.type === 'income' ? 'Доход' : 'Расход',
+          typeText: record.type === 'income' ? localizeFilter('Income') : localizeFilter('Outcome'),
         };
       }));
 
       this.renderChart({
         labels: categories.map((c) => c.title),
         datasets: [{
-          label: 'Paсходы по категориям',
+          label: localizeFilter('ExpensesByCategory'),
           // eslint-disable-next-line arrow-body-style
           data: categories.map((c) => {
             return this.records.reduce((total, r) => {
