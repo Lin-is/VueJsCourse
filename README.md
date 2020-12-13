@@ -1,7 +1,7 @@
 # CRM система
-Этот проект - результат прохождения [курса по VueJS от Владилена Минина](https://www.youtube.com/playlist?list=PLqKQF2ojwm3njNpksFCi8o-_c-9Vva_W0)
+Этот проект - результат прохождения [курса по Vue.js от Владилена Минина](https://www.youtube.com/playlist?list=PLqKQF2ojwm3njNpksFCi8o-_c-9Vva_W0)
 
-Использовались VueJS, Firebase
+Использовались Vue.js, Firebase
 
 Реализовано получение данных о курсе валют с помощью API, сайт подсоединен к настоящей базе данных на Firebase. В профиле можно переключить язык (русский, английский).
 
